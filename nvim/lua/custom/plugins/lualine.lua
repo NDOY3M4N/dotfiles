@@ -7,7 +7,7 @@ return {
     'letieu/harpoon-lualine',
   },
   config = function()
-    local palette = require('catppuccin.palettes').get_palette 'mocha'
+    local palette = require('tokyonight.colors').setup()
 
     local projectRoot = function()
       local icon = '%#St_cwd_icon#' .. '󰉋 '
@@ -29,6 +29,7 @@ return {
         component_separators = '',
         section_separators = '',
         globalstatus = true,
+        theme = 'tokyonight',
       },
       sections = {
         lualine_c = {
@@ -37,9 +38,9 @@ return {
             -- colored = false,
             icon_only = true,
             padding = { left = 1, right = 0 },
-            color = { bg = palette.mantle, fg = palette.text },
+            color = { bg = palette.bg_sidebar, fg = palette.fg_sidebar },
           },
-          { 'filename', color = { bg = palette.mantle, fg = palette.text } },
+          { 'filename', color = { bg = palette.bg_sidebar, fg = palette.fg_sidebar } },
           '%=',
           { 'harpoon2', icon = '󰛢 ' },
         },

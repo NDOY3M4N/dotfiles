@@ -4,7 +4,6 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
-    -- enabled = false,
     opts = {
       no_italic = true,
       integrations = {
@@ -22,21 +21,20 @@ return {
       },
     },
     init = function()
-      vim.cmd.colorscheme 'catppuccin'
+      -- vim.cmd.colorscheme 'catppuccin'
     end,
   },
   {
     'folke/tokyonight.nvim',
-    enabled = false,
     priority = 1000, -- Make sure to load this before all the other start plugins.
-    ---@type Config
+    ---@type tokyonight.Config
     opts = {
       styles = {
         comments = { italic = false },
         keywords = { italic = false },
       },
       on_colors = function(c)
-        c.border = c.fg
+        c.border = c.border
       end,
     },
     init = function()
