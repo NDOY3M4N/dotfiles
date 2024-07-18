@@ -29,6 +29,7 @@ return {
     priority = 1000, -- Make sure to load this before all the other start plugins.
     ---@type tokyonight.Config
     opts = {
+      style = 'moon',
       styles = {
         comments = { italic = false },
         keywords = { italic = false },
