@@ -1,6 +1,9 @@
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Enable editorconfig
+vim.g.editorconfig = false
+
 -- Hide the Netrw banner
 vim.g.netrw_banner = 0
 
