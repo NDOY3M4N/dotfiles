@@ -12,6 +12,8 @@ return {
 
       -- Schema information
       'b0o/SchemaStore.nvim',
+      -- Linter plugin
+      'mfussenegger/nvim-lint',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -60,21 +62,15 @@ return {
       end
 
       -- Enable the following language servers
-      --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-      --
-      --  Add any additional override configuration in the following tables. Available keys are:
-      --  - cmd (table): Override the default command used to start the server
-      --  - filetypes (table): Override the default list of associated filetypes for the server
-      --  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
-      --  - settings (table): Override the default settings passed when initializing the server.
-      --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local mason_registry = require 'mason-registry'
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
 
       local servers = {
         intelephense = {},
 
-        biome = {},
+        -- NOTE: when the support for HTML super language is there...
+        -- biome = {},
+        eslint = {},
         tsserver = {
           init_options = {
             plugins = {
@@ -119,11 +115,6 @@ return {
       }
 
       -- Ensure the servers and tools above are installed
-      --  To check the current status of installed tools and/or manually install
-      --  other tools, you can run
-      --    :Mason
-      --
-      --  You can press `g?` for help in this menu.
       require('mason').setup()
 
       -- You can add other tools here that you want Mason to install
@@ -164,9 +155,10 @@ return {
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
-        -- Disable "format_on_save lsp_fallback" for languages that don't
+        -- NOTE: Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
+
         local disable_filetypes = { c = true, cpp = true }
         return {
           timeout_ms = 500,
@@ -176,7 +168,7 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
-        javascript = { 'biome' },
+        -- javascript = { 'biome' },
         -- typescript = { 'prettierd' },
         -- vue = { 'prettierd' },
       },
