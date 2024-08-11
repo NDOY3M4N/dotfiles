@@ -32,8 +32,10 @@ vim.keymap.set('n', '<leader>dd', function()
   -- TODO: refactor this
   if vim.diagnostic.is_enabled() then
     vim.diagnostic.enable(false)
+    vim.notify('Diagnostics disabled', vim.log.levels.INFO, { title = 'Diagnostics' })
   else
     vim.diagnostic.enable()
+    vim.notify('Diagnostics enabled', vim.log.levels.INFO, { title = 'Diagnostics' })
   end
 end, { desc = 'Toggle diagnostics' })
 
