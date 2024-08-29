@@ -44,6 +44,7 @@ cmp.setup {
 cmp.setup.filetype({ 'sql', 'mysql' }, {
   sources = {
     { name = 'vim-dadbod-completion' },
+    { name = 'luasnip' },
     { name = 'buffer' },
   },
 })

@@ -9,6 +9,7 @@ local c = ls.choice_node
 local fmt = require('luasnip.extras.fmt').fmt
 
 ls.add_snippets('php', {
+  -- NOTE: pretty var_dump
   s(
     'vdd',
     fmt(
@@ -24,6 +25,7 @@ echo '</pre>';{}
       }
     )
   ),
+
   s(
     'pf',
     fmt(
