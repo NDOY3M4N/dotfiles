@@ -1,4 +1,4 @@
-require('luasnip.session.snippet_collection').clear_snippets 'php'
+require('luasnip.session.snippet_collection').clear_snippets 'sql'
 
 local ls = require 'luasnip'
 
