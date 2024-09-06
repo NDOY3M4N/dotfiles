@@ -12,8 +12,6 @@ return {
 
       -- Schema information
       'b0o/SchemaStore.nvim',
-      -- Linter plugin
-      'mfussenegger/nvim-lint',
     },
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -70,7 +68,7 @@ return {
 
         -- NOTE: when the support for HTML super language is there...
         -- biome = {},
-        eslint = {},
+        -- eslint = {},
         tsserver = {
           init_options = {
             preferences = {

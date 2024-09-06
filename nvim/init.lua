@@ -15,6 +15,8 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: I can load the plugins for the kickstart repo
   require 'kickstart.plugins.gitsigns',
+  require 'kickstart.plugins.lint',
+  require 'kickstart.plugins.debug',
 
   -- NOTE: I can also load my custom plugins
   { import = 'custom.plugins' },
