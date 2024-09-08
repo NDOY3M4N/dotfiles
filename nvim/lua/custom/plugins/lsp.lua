@@ -69,7 +69,7 @@ return {
         -- NOTE: when the support for HTML super language is there...
         -- biome = {},
         -- eslint = {},
-        tsserver = {
+        ts_ls = {
           init_options = {
             preferences = {
               includeInlayParameterNameHints = 'all',
