@@ -1,13 +1,11 @@
 return {
-  -- Hide env variables
+  -- Display colors
   {
     'norcalli/nvim-colorizer.lua',
     opts = {
-      'css',
+      css = { hsl_fn = true },
+      html = { mode = 'foreground' },
       'javascript',
-      html = {
-        mode = 'foreground',
-      },
     },
   },
 }
