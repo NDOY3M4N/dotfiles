@@ -176,8 +176,9 @@ return {
       formatters_by_ft = {
         lua = { 'stylua' },
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
+        svelte = { 'prettierd' },
+        typescript = { 'prettierd' },
         -- javascript = { 'biome' },
-        -- typescript = { 'prettierd' },
         -- vue = { 'prettierd' },
       },
     },
