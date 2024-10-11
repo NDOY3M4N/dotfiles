@@ -63,13 +63,23 @@ return {
       local mason_registry = require 'mason-registry'
       local vue_language_server_path = mason_registry.get_package('vue-language-server'):get_install_path() .. '/node_modules/@vue/language-server'
 
-      local servers = {
-        intelephense = {},
+      -- NOTE: for denols
+      vim.g.markdown_fenced_languages = {
+        'ts=typescript',
+      }
 
+      local servers = {
         -- NOTE: when the support for HTML super language is there...
         -- biome = {},
         -- eslint = {},
         ts_ls = {
+          root_dir = function()
+            if vim.fs.root(0, { 'deno.json', 'deno.jsonc' }) then
+              return nil
+            end
+
+            return vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' })
+          end,
           init_options = {
             preferences = {
               includeInlayParameterNameHints = 'all',
@@ -89,12 +99,27 @@ return {
               },
             },
           },
+          single_file_support = false,
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
+        denols = {
+          root_dir = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }),
+          init_options = {
+            lint = true,
+            suggest = {
+              imports = {
+                hosts = {
+                  ['https://deno.land'] = true,
+                },
+              },
+            },
+          },
+        },
+
+        -- angularls = {},
         volar = {},
         svelte = {},
-        -- angularls = {},
-
+        intelephense = {},
         gopls = {
           settings = {
             gopls = {
@@ -174,12 +199,12 @@ return {
         }
       end,
       formatters_by_ft = {
-        lua = { 'stylua' },
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
-        svelte = { 'prettierd' },
         typescript = { 'prettierd' },
-        -- javascript = { 'biome' },
-        -- vue = { 'prettierd' },
+        javascript = { 'prettierd' },
+        svelte = { 'prettierd' },
+        vue = { 'prettierd' },
+        lua = { 'stylua' },
       },
     },
   },
