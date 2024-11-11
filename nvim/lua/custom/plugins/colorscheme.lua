@@ -35,7 +35,7 @@ return {
         keywords = { italic = false },
       },
       on_colors = function(c)
-        c.border = c.border
+        c.border = c.blue
       end,
     },
     init = function()

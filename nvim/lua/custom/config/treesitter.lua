@@ -12,6 +12,10 @@ vim.defer_fn(function()
       'bash',
       'markdown',
       'markdown_inline',
+      'html',
+      'css',
+      'scss',
+      'json',
 
       'lua',
       'python',
