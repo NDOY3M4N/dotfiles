@@ -7,7 +7,7 @@ local cmp = require 'cmp'
 
 cmp.setup {
   sources = {
-    -- { name = 'cody' },
+    { name = 'cody' },
     { name = 'luasnip' },
     { name = 'git' },
     { name = 'nvim_lsp' },
