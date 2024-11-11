@@ -72,14 +72,16 @@ return {
         -- NOTE: when the support for HTML super language is there...
         -- biome = {},
         -- eslint = {},
+        -- emmet_ls = {},
+        html = {},
         ts_ls = {
-          root_dir = function()
-            if vim.fs.root(0, { 'deno.json', 'deno.jsonc' }) then
-              return nil
-            end
-
-            return vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' })
-          end,
+          -- root_dir = function()
+          --   if vim.fs.root(0, { 'deno.json', 'deno.jsonc' }) then
+          --     return nil
+          --   end
+          --
+          --   return vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' })
+          -- end,
           init_options = {
             preferences = {
               includeInlayParameterNameHints = 'all',
@@ -103,7 +105,13 @@ return {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
         denols = {
-          root_dir = vim.fs.root(0, { 'deno.json', 'deno.jsonc' }),
+          root_dir = function()
+            if vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' }) then
+              return nil
+            end
+
+            return vim.fs.root(0, { 'deno.json', 'deno.jsonc' })
+          end,
           init_options = {
             lint = true,
             suggest = {
@@ -205,6 +213,7 @@ return {
         svelte = { 'prettierd' },
         vue = { 'prettierd' },
         lua = { 'stylua' },
+        php = { 'php_cs_fixer' },
       },
     },
   },
