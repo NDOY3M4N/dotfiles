@@ -28,6 +28,7 @@ vim.api.nvim_create_autocmd('Filetype', {
     'netrw',
     'qf',
     'oil',
+    'spectre_panel',
     -- 'dbout',
   },
   callback = function(event)
