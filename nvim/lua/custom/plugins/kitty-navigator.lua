@@ -6,14 +6,14 @@ return {
       'cp navigate_kitty.py ~/.config/kitty',
       'cp pass_keys.py ~/.config/kitty',
     },
-    -- opts = {
-    --   keybindings = {
-    --     left = '<C-h>',
-    --     down = '<C-n>',
-    --     up = '<C-e>',
-    --     right = '<C-l>',
-    --   },
-    -- },
+    opts = {
+      keybindings = {
+        left = '<C-h>',
+        down = '<C-n>',
+        up = '<C-e>',
+        right = '<C-l>',
+      },
+    },
     keys = {
       {
         '<C-h>',
