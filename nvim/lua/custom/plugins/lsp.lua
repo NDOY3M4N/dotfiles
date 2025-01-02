@@ -82,6 +82,7 @@ return {
           --
           --   return vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' })
           -- end,
+          root_dir = require('lspconfig').util.root_pattern 'package.json',
           init_options = {
             preferences = {
               includeInlayParameterNameHints = 'all',
@@ -105,13 +106,7 @@ return {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
         denols = {
-          root_dir = function()
-            if vim.fs.root(0, { 'tsconfig.json', 'jsconfig.json', 'package.json' }) then
-              return nil
-            end
-
-            return vim.fs.root(0, { 'deno.json', 'deno.jsonc' })
-          end,
+          root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
           init_options = {
             lint = true,
             suggest = {
@@ -202,14 +197,28 @@ return {
 
         local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 500,
+          timeout_ms = 1000,
           lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
         }
       end,
       formatters_by_ft = {
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
-        typescript = { 'prettierd' },
-        javascript = { 'prettierd' },
+        typescript = function()
+          if require('lspconfig').util.root_pattern 'package.json' then
+            return { 'prettierd' }
+          else
+            return nil
+          end
+        end,
+        javascript = function()
+          if require('lspconfig').util.root_pattern 'package.json' then
+            return { 'prettierd' }
+          else
+            return nil
+          end
+        end,
+        typescriptreact = { 'prettierd' },
+        javascriptreact = { 'prettierd' },
         svelte = { 'prettierd' },
         vue = { 'prettierd' },
         lua = { 'stylua' },
