@@ -19,10 +19,11 @@ FOREIGN KEY ({}) REFERENCES {} ({})
         i(1),
         i(2),
         rep(1),
-        i(3, 'NO ACTION'),
+        i(3, 'NO ACTION'), -- either choose `NO ACTION` or `RESTRICT` or `SET NULL`
         rep(3),
         i(0, ','),
       }
     )
   ),
+  s('pk', fmt('PRIMARY KEY({})', { i(1) })),
 })
