@@ -1,7 +1,14 @@
+---@type LazySpec
 return {
   -- Hide env variables
   {
     'laytan/cloak.nvim',
-    opts = { cloak_telescope = false },
+    config = function()
+      require('cloak').setup {
+        cloak_telescope = false,
+      }
+
+      vim.keymap.set('n', '<leader>vv', '<cmd>CloakToggle<cr>', { desc = 'Toggle cloak' })
+    end,
   },
 }
