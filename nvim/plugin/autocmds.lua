@@ -5,15 +5,19 @@ local function augroup(group)
   vim.api.nvim_create_augroup('kickstart-' .. group, { clear = true })
 end
 
--- Highlight when yanking (copying) text
---  Try it with `yap` in normal mode
---  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd('TextYankPost', {
   desc = 'Highlight when yanking (copying) text',
   group = augroup 'highlight-yank',
   callback = function()
     vim.highlight.on_yank()
   end,
+})
+
+vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
+  desc = 'Set blade filetype (for Laravel dev)',
+  group = augroup 'blade-ft',
+  pattern = '*.blade.php',
+  command = 'set ft=blade',
 })
 
 vim.api.nvim_create_autocmd('Filetype', {
