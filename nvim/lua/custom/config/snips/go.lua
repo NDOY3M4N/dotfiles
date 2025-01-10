@@ -31,4 +31,18 @@ func <>(<>) <> {
       { delimiters = '<>' }
     )
   ),
+  s(
+    'ft',
+    fmt(
+      [[
+import "testing"
+
+func Test<>(t *testing.T) {
+  <>
+}
+]],
+      { i(1), i(0) },
+      { delimiters = '<>' }
+    )
+  ),
 })
