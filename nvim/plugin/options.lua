@@ -1,8 +1,8 @@
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
--- Enable editorconfig
-vim.g.editorconfig = false
+-- Enable editorconfig (just for clarity because this is enabled by default)
+vim.g.editorconfig = true
 
 -- Hide the Netrw banner
 vim.g.netrw_banner = 0
@@ -67,8 +67,8 @@ opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-opt.list = true
-opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- opt.list = true
+-- opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 opt.inccommand = 'split'
