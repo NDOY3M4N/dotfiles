@@ -146,6 +146,17 @@ return {
             },
           },
         },
+        yamlls = {
+          settings = {
+            json = {
+              schemaStore = {
+                enable = false,
+                url = '',
+              },
+              schemas = require('schemastore').yaml.schemas(),
+            },
+          },
+        },
         -- require 'custom.config.lsp.lua_ls',
         lua_ls = require 'custom.config.lsp.lua_ls',
       }
