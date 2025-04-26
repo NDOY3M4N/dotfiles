@@ -5,6 +5,7 @@ return {
     name = 'catppuccin',
     priority = 1000,
     opts = {
+      flavour = "mocha",
       no_italic = true,
       integrations = {
         harpoon = true,
@@ -21,7 +22,7 @@ return {
       },
     },
     init = function()
-      -- vim.cmd.colorscheme 'catppuccin'
+      vim.cmd.colorscheme 'catppuccin'
     end,
   },
   {
@@ -39,7 +40,7 @@ return {
       end,
     },
     init = function()
-      vim.cmd.colorscheme 'tokyonight'
+      -- vim.cmd.colorscheme 'tokyonight'
     end,
   },
 }
