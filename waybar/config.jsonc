@@ -1,0 +1,121 @@
+{
+  "layer": "top", // Waybar at top layer
+  "position": "bottom", // Waybar position (top|bottom|left|right)
+  // NOTE: Choose the order of the modules
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "custom/music"
+  ],
+  "modules-right": [
+    "pulseaudio",
+    // "backlight", 
+    "battery",
+    "hyprland/language",
+    "network",
+    "clock",
+    "tray",
+    "custom/lock",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "format": "{icon}",
+    "format-icons": {
+      "default": " "
+    },
+    "on-click": "activate",
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "tray": {
+    "icon-size": 21,
+    "spacing": 10
+  },
+  "hyprland/language": {
+    "format": " {}",
+    "format-en": "en",
+    "format-fr": "fr"
+  },
+  "custom/music": {
+    "format": "󰎇  {}",
+    "escape": true,
+    "interval": 5,
+    "tooltip": false,
+    "exec": "playerctl metadata --format='{{ title }}'",
+    "on-click": "playerctl play-pause",
+    "max-length": 50
+  },
+  "clock": {
+    "timezone": "Africa/Dakar",
+    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+    "format": " {:%H:%M}",
+    "format-alt": " {:%A %d %B %Y}"
+  },
+  "backlight": {
+    "device": "intel_backlight",
+    "format": "{icon}",
+    "format-icons": [
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
+    ]
+  },
+  "network": {
+    "interface": "wlp3s0",
+    "format-wifi": " {ipaddr}/{cidr}",
+    "format-ethernet": " {ipaddr}/{cidr}",
+    "format-disconnected": "", //An empty format will hide the module.
+    "tooltip-format": "{ifname} via {gwaddr} 󰊗",
+    "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+    "tooltip-format-ethernet": "{ifname} ",
+    "tooltip-format-disconnected": "Disconnected"
+    // "max-length": 50
+  },
+  "battery": {
+    "interval": 60,
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{capacity}% {icon}",
+    "format-icons": [
+      " ",
+      " ",
+      " ",
+      " ",
+      " "
+    ],
+    "max-length": 25
+  },
+  "pulseaudio": {
+    // "scroll-step": 1, // %, can be a float
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 ",
+    "format-icons": {
+      "default": [
+        "",
+        "",
+        ""
+      ]
+    },
+    "on-click": "pavucontrol"
+  },
+  "custom/lock": {
+    "tooltip": false,
+    "on-click": "hyprlock",
+    "format": ""
+  },
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "wlogout &",
+    "format": " "
+  }
+}

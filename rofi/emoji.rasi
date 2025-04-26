@@ -1,0 +1,8 @@
+@import "mocha"
+
+@theme "/home/p4p1/.local/share/rofi/themes/catppuccin-mocha.rasi"
+
+listview {
+  columns: 1;
+  lines: 12;
+}
