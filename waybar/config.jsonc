@@ -1,37 +1,78 @@
 {
   "layer": "top", // Waybar at top layer
   "position": "bottom", // Waybar position (top|bottom|left|right)
+  "margin": "4 8",
+  "spacing": 8,
   // NOTE: Choose the order of the modules
   "modules-left": [
-    "hyprland/workspaces"
+    "group/hardware",
+    "pulseaudio",
+    "hyprland/language",
+    "network"
   ],
   "modules-center": [
-    "custom/music"
+    "hyprland/workspaces#pacman"
   ],
   "modules-right": [
-    "pulseaudio",
-    // "backlight", 
-    "battery",
-    "hyprland/language",
-    "network",
-    "clock",
     "tray",
+    "custom/notifications",
+    "clock",
     "custom/lock",
     "custom/power"
   ],
-  "hyprland/workspaces": {
+  // NOTE: Modules configurations
+  "hyprland/workspaces#pacman": {
+    "active-only": false,
+    "all-outputs": true,
     "format": "{icon}",
-    "format-icons": {
-      "default": " "
-    },
     "on-click": "activate",
+    "on-scroll-up": "hyprctl dispatch workspace e+1",
+    "on-scroll-down": "hyprctl dispatch workspace e-1",
+    "show-special": false,
     "persistent-workspaces": {
-      "*": 5
+      "1": [],
+      "2": [],
+      "3": [],
+      "4": [],
+      "5": []
+    },
+    "format-icons": {
+      "active": "<span font='16'>󰮯</span>",
+      "empty": "<span font='8'></span>",
+      "default": "󰊠"
     }
+  },
+  "group/hardware": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 500,
+      "children-class": "not-power",
+      "transition-top-to-bottom": true
+    },
+    "modules": [
+      "battery",
+      "memory",
+      "cpu",
+      "disk"
+    ]
   },
   "tray": {
     "icon-size": 21,
     "spacing": 10
+  },
+  "cpu": {
+    "format": " {}%",
+    "max-length": 10
+  },
+  "memory": {
+    "interval": 30,
+    "format": " {}%",
+    "max-length": 10
+  },
+  "disk": {
+    "interval": 30,
+    "format": " {percentage_free}% used",
+    "path": "/"
   },
   "hyprland/language": {
     "format": " {}",
@@ -49,30 +90,28 @@
   },
   "clock": {
     "timezone": "Africa/Dakar",
-    "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
     "format": " {:%H:%M}",
-    "format-alt": " {:%A %d %B %Y}"
-  },
-  "backlight": {
-    "device": "intel_backlight",
-    "format": "{icon}",
-    "format-icons": [
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      "",
-      ""
-    ]
+    "format-alt": " {:%A %d %B %Y}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffead3'><b>{}</b></span>",
+        "days": "<span color='#ecc6d9'><b>{}</b></span>",
+        "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+        "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+      }
+    }
   },
   "network": {
     "interface": "wlp3s0",
-    "format-wifi": " {ipaddr}/{cidr}",
-    "format-ethernet": " {ipaddr}/{cidr}",
-    "format-disconnected": "", //An empty format will hide the module.
+    "format": " {ipaddr}/{cidr}",
+    // "format-ethernet": " {ipaddr}/{cidr}",
+    "format-disconnected": "󱚼 ", //An empty format will hide the module.
     "tooltip-format": "{ifname} via {gwaddr} 󰊗",
     "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
     "tooltip-format-ethernet": "{ifname} ",
@@ -80,25 +119,26 @@
     // "max-length": 50
   },
   "battery": {
-    "interval": 60,
+    "interval": 10,
     "states": {
       "warning": 30,
       "critical": 15
     },
-    "format": "{capacity}% {icon}",
+    "format-charging": " {capacity}%",
+    "format": "{icon} {capacity}%",
     "format-icons": [
-      " ",
-      " ",
-      " ",
-      " ",
-      " "
+      "",
+      "",
+      "",
+      "",
+      ""
     ]
     // "max-length": 25
   },
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{icon} {volume}%",
-    "format-muted": "󰝟 ",
+    "format-muted": "",
     "format-icons": {
       "default": [
         "",
@@ -117,5 +157,21 @@
     "tooltip": false,
     "on-click": "wlogout &",
     "format": " "
+  },
+  "custom/notifications": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "<span foreground='#94e2d5'></span>",
+      "none": "<span foreground='#9399b2'></span>",
+      "dnd-notification": "<span foreground='#f38ba8'></span>",
+      "dnd-none": " "
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "on-click-right": "sleep 0.1 && swaync-client -d -sw",
+    "escape": true
   }
 }
