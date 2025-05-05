@@ -46,7 +46,7 @@ return {
             local MiniFiles = require 'mini.files'
 
             if not MiniFiles.close() then
-              MiniFiles.open()
+              MiniFiles.open(vim.api.nvim_buf_get_name(0))
             end
           end,
           desc = 'Toggle float for mini.files',
