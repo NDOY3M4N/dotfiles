@@ -71,7 +71,7 @@
   },
   "disk": {
     "interval": 30,
-    "format": " {percentage_free}% used",
+    "format": " {percentage_used}%",
     "path": "/"
   },
   "hyprland/language": {
@@ -103,7 +103,7 @@
         "days": "<span color='#ecc6d9'><b>{}</b></span>",
         "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
         "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
-        "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+        "today": "<span color='#ff6699'><b>{}</b></span>"
       }
     }
   },
@@ -138,7 +138,7 @@
   "pulseaudio": {
     // "scroll-step": 1, // %, can be a float
     "format": "{icon} {volume}%",
-    "format-muted": "",
+    "format-muted": "<span font='16'>󰝟 </span>",
     "format-icons": {
       "default": [
         "",
@@ -156,7 +156,7 @@
   "custom/power": {
     "tooltip": false,
     "on-click": "wlogout &",
-    "format": " "
+    "format": ""
   },
   "custom/notifications": {
     "tooltip": false,
