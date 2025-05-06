@@ -1,30 +1,15 @@
 { pkgs, lib, ... }:
 
 {
+  imports = [
+    ./modules/sh.nix
+  ];
+
   home.username = "p4p1";
   home.homeDirectory = "/home/p4p1";
   home.stateVersion = "24.11"; # Please read the comment before changing.
 
   nixpkgs.config.allowUnfree = true;
-
-  # home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-
-    # # It is sometimes useful to fine-tune packages, for example, by applying
-    # # overrides. You can do that directly here, just don't forget the
-    # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
-    # # fonts?
-    # (pkgs.nerdfonts.override { fonts = [ "FantasqueSansMono" ]; })
-
-    # # You can also create simple shell scripts directly inside your
-    # # configuration. For example, this adds a command 'my-hello' to your
-    # # environment:
-    # (pkgs.writeShellScriptBin "my-hello" ''
-    #   echo "Hello, ${config.home.username}!"
-    # '')
-  # ];
 
   services.hypridle.enable = true;
   programs.hyprlock.enable = true;
@@ -45,63 +30,6 @@
   };
 
   # programs.kitty.enable = true;
-
-  programs.zsh = {
-    enable = true;
-    syntaxHighlighting.enable = true;
-    autosuggestion.enable = true;
-    plugins = [
-      {
-        name = "fzf-tab";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "v1.2.0";
-          sha256 = "sha256-q26XVS/LcyZPRqDNwKKA9exgBByE0muyuNb0Bbar2lY=";
-        };
-      }
-    ];
-    initExtra = ''
-      # Make completion (including directory completion) case-insensitive
-      zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-      # Disable sort for git-checkout completion
-      zstyle ':completion:*:git-checkout:*' sort false
-      # Set description format to enable group support
-      zstyle ':completion:*:descriptions' format '[%d]'
-      # Disable default completion menu for fzf-tab to capture unambiguous prefix
-      zstyle ':completion:*' menu no
-      # To make fzf-tab follow FZF_DEFAULT_OPTS (optional)
-      zstyle ':fzf-tab:*' use-fzf-default-opts yes
-      # Switch group keys
-      zstyle ':fzf-tab:*' switch-group '<' '>'
-
-      # oh-my-posh init
-      eval "$(oh-my-posh init zsh --config /home/p4p1/.config/ohmyposh/config.toml)"
-
-      # Change keymap for autosuggestion
-      bindkey '^E' autosuggest-accept
-    '';
-    shellAliases = {
-      nrs = "sudo nixos-rebuild switch --flake ~/Documents/Projects/private/dotfiles/nix";
-      hrs = "home-manager switch --flake ~/Documents/Projects/private/dotfiles/nix";
-      la = "ls -la";
-      lr = "lazydocker";
-      lg = "lazygit";
-      # NOTE: Docker compose aliases
-      dcb = "docker compose build";
-      dcps = "docker compose ps";
-      dcrestart = "docker compose restart";
-      dcrm = "docker compose rm";
-      dcup = "docker compose up";
-      dcupb = "docker compose up --build";
-      dcupd = "docker compose up -d";
-      dcupdb = "docker compose up -d --build";
-      dcdn = "docker compose down";
-      dcl = "docker compose logs";
-      dclf = "docker compose logs -f";
-      dclF = "docker compose logs -f --tail0";
-    };
-  };
 
   programs.git = {
     enable = true;
