@@ -37,6 +37,7 @@
       bindkey '^E' autosuggest-accept
     '';
     shellAliases = {
+      ns = "nix-shell";
       nrs = "sudo nixos-rebuild switch --flake ~/Documents/Projects/private/dotfiles/nix";
       hrs = "home-manager switch --flake ~/Documents/Projects/private/dotfiles/nix";
       la = "ls -la";
