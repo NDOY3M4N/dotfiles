@@ -17,6 +17,7 @@
     "tray",
     "custom/notifications",
     "clock",
+    "custom/cmus",
     "custom/lock",
     "custom/power"
   ],
@@ -147,6 +148,15 @@
       ]
     },
     "on-click": "pavucontrol"
+  },
+  "custom/cmus": {
+    "format": "♪ {}",
+    //"max-length": 15,
+    "interval": 10,
+    "exec": "cmus-remote -C \"format_print '%a - %t'\"", // artist - title
+    "exec-if": "pgrep cmus",
+    "on-click": "cmus-remote -u", //toggle pause
+    "escape": true //handle markup entities
   },
   "custom/lock": {
     "tooltip": false,
