@@ -47,11 +47,6 @@
     NIXOS_OZONE_WL = "1";
   };
 
-  # environment.variables = {
-  #   SRC_ENDPOINT = "https://sourcegraph.com";
-  #   SRC_ACCESS_TOKEN = "sgp_fd1b4edb60bf82b8_b79c7ab442ee1ca08d8e52de15d3b613b4b6f70b";
-  # };
-
   hardware = {
     graphics.enable = true;
     # nvidia.modesetting.enable = true;
