@@ -1,0 +1,2 @@
+ALTER USER 'root'@'localhost' IDENTIFIED BY 'Pa$$er123';
+FLUSH PRIVILEGES;

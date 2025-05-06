@@ -150,8 +150,9 @@
   security.pam.services.hyprlock = {};
 
   # Enable zsh and set as default shell for all users
-  programs.zsh.enable = true;
+  environment.shells = with pkgs; [ zsh ];
   users.defaultUserShell = pkgs.zsh;
+  programs.zsh.enable = true;
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -173,6 +174,7 @@
     brightnessctl
     lua5_1
     lua51Packages.luarocks-nix  # Luarocks for Lua 5.1
+    git
 
     # NOTE: for device pairing
     libimobiledevice
