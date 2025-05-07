@@ -199,6 +199,7 @@
 
   home.sessionVariables = {
     EDITOR = "nvim";
+    GEMINI_API_KEY = builtins.getEnv "GEMINI_API_KEY";
   };
 
   home.sessionPath = [
