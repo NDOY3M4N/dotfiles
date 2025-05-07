@@ -1,8 +1,6 @@
 { config, pkgs, ... }:
 
-let
-  secrets = import ./secrets.nix;
-in {
+{
   imports = [
     ./modules/sh.nix
     ./modules/zed.nix
@@ -10,7 +8,7 @@ in {
 
   home.username = "p4p1";
   home.homeDirectory = "/home/p4p1";
-  home.stateVersion = "24.11";
+  home.stateVersion = "24.11"; # Please read the comment before changing.
 
   nixpkgs.config.allowUnfree = true;
 
@@ -186,7 +184,6 @@ in {
 
   home.sessionVariables = {
     EDITOR = "nvim";
-    GEMINI_API_KEY = secrets.geminiApiKey;
   };
 
   home.sessionPath = [
