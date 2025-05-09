@@ -14,6 +14,8 @@
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
+  # NOTE: for kanata
+  boot.kernelModules = [ "uinput" ];
 
   networking.hostName = "nixos"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -40,6 +42,7 @@
     # displayManager.gdm.waylandOnly = true;
     xkb.layout = "us";
     xkb.variant = "";
+    # xkb.options = "caps:escape";
   };
 
   environment.sessionVariables = {
@@ -49,7 +52,39 @@
 
   hardware = {
     graphics.enable = true;
+    uinput.enable = true;
     # nvidia.modesetting.enable = true;
+  };
+
+  # NOTE: kanata
+
+  services.udev.extraRules = ''
+    KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
+  '';
+
+  services.kanata = {
+    enable = true;
+    keyboards = {
+      internalKeyboard = {
+        devices = [
+          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
+        ];
+        extraDefCfg = "process-unmapped-keys yes";
+        config = ''
+          (defsrc
+            caps
+          )
+
+          (defalias
+            escctrl (tap-hold 200 200 esc lctl)
+          )
+
+          (deflayer base
+            @escctrl
+          )
+        '';
+      };
+    };
   };
 
   # NOTE: mysql
@@ -115,6 +150,8 @@
   #   serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   # };
 
+  users.groups.uinput = { };
+
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
@@ -122,7 +159,7 @@
   users.users.p4p1 = {
     isNormalUser = true;
     description = "Abdoulaye NDOYE";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "uinput" ];
     # packages = with pkgs; [
     # #  thunderbird
     # ];
@@ -174,6 +211,7 @@
     lua51Packages.luarocks-nix  # Luarocks for Lua 5.1
     git
     gnome-network-displays
+    kanata
 
     # NOTE: for device connection
     libimobiledevice

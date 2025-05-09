@@ -138,7 +138,7 @@
     rofi-wayland
     alsa-utils
     pamixer
-    kanata
+    # kanata
     # picom
     brave
     cava
