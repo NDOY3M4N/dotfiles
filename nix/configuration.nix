@@ -128,18 +128,21 @@
     # ];
   };
 
-  virtualisation.docker.enable = true;
-  virtualisation.docker.storageDriver = "btrfs";
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
+  # virtualisation.docker.enable = true;
+  # virtualisation.docker.storageDriver = "btrfs";
+  # virtualisation.docker.rootless = {
+  #   enable = true;
+  #   setSocketVariable = true;
+  # };
 
   # Install firefox.
   programs.firefox.enable = true;
 
   # Install Hyprland
   programs.hyprland.enable = true;
+
+  # Enable hyprlock
+  programs.hyprlock.enable = true;
 
   # To allow hyprlock to authenticate
   security.pam.services.hyprlock = {};
@@ -170,8 +173,9 @@
     lua5_1
     lua51Packages.luarocks-nix  # Luarocks for Lua 5.1
     git
+    gnome-network-displays
 
-    # NOTE: for device pairing
+    # NOTE: for device connection
     libimobiledevice
     ifuse
     usbmuxd
@@ -212,6 +216,7 @@
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 7236 7250 ];
   networking.firewall.allowedUDPPorts = [ 7236 5333 ];
+  networking.firewall.trustedInterfaces = [ "p2p-wl+" ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
 

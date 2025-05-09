@@ -171,7 +171,7 @@
     air
     kitty
     ghostty
-    gnome-network-displays
+    # gnome-network-displays
     rqbit
     highlight
     glow
