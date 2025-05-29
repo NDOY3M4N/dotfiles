@@ -16,8 +16,8 @@ ls.add_snippets('php', {
       [[
 echo '<pre>';
 var_dump({});
-die();
-echo '</pre>';{}
+echo '</pre>';
+die();{}
 ]],
       {
         i(1),
