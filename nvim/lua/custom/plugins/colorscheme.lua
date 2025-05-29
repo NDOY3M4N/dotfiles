@@ -4,9 +4,11 @@ return {
     'catppuccin/nvim',
     name = 'catppuccin',
     priority = 1000,
+    ---@type CatppuccinOptions
     opts = {
-      flavour = "mocha",
+      flavour = 'mocha',
       no_italic = true,
+      transparent_background = true,
       integrations = {
         harpoon = true,
         cmp = true,
@@ -38,6 +40,11 @@ return {
       on_colors = function(c)
         c.border = c.blue
       end,
+      plugins = {
+        telescope = true,
+        dap = true,
+        cmp = true,
+      },
     },
     init = function()
       -- vim.cmd.colorscheme 'tokyonight'

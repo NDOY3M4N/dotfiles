@@ -106,6 +106,7 @@ return {
           filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
         },
         denols = {
+          enable = false,
           root_dir = require('lspconfig').util.root_pattern('deno.json', 'deno.jsonc'),
           init_options = {
             lint = true,
@@ -119,7 +120,6 @@ return {
           },
         },
 
-        -- angularls = {},
         volar = {},
         svelte = {},
         intelephense = {},
@@ -189,45 +189,34 @@ return {
   { -- Autoformat
     'stevearc/conform.nvim',
     lazy = false,
-    keys = {
-      {
-        '<leader>f',
-        function()
-          require('conform').format { async = true, lsp_fallback = true }
-        end,
-        mode = '',
-        desc = '[F]ormat buffer',
-      },
-    },
+    event = { 'LspAttach', 'BufReadPost', 'BufNewFile' },
+    -- keys = {
+    --   {
+    --     '<leader>f',
+    --     function()
+    --       require('conform').format { async = true, lsp_fallback = true }
+    --     end,
+    --     mode = '',
+    --     desc = '[F]ormat buffer',
+    --   },
+    -- },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
         -- NOTE: Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
-
-        local disable_filetypes = { c = true, cpp = true }
+        -- local disable_filetypes = { c = true, cpp = true }
         return {
-          timeout_ms = 1000,
-          lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          timeout_ms = 2500,
+          -- lsp_fallback = not disable_filetypes[vim.bo[bufnr].filetype],
+          lsp_fallback = true,
         }
       end,
       formatters_by_ft = {
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
-        typescript = function()
-          if require('lspconfig').util.root_pattern 'package.json' then
-            return { 'prettierd' }
-          else
-            return nil
-          end
-        end,
-        javascript = function()
-          if require('lspconfig').util.root_pattern 'package.json' then
-            return { 'prettierd' }
-          else
-            return nil
-          end
-        end,
+        javascript = { 'prettierd' },
+        typescript = { 'prettierd' },
         typescriptreact = { 'prettierd' },
         javascriptreact = { 'prettierd' },
         svelte = { 'prettierd' },

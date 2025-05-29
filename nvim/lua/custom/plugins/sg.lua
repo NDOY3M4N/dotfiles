@@ -8,7 +8,7 @@ return {
     opts = {
       on_attach = require('utils').on_attach,
       -- chat = {
-      --   default_model = 'llma3.1',
+      --   default_model = '',
       -- },
     },
   },

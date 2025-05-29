@@ -8,7 +8,7 @@ local lspkind = require 'lspkind'
 
 cmp.setup {
   sources = {
-    { name = 'cody' },
+    -- { name = 'cody' },
     { name = 'luasnip' },
     { name = 'git' },
     { name = 'nvim_lsp' },
