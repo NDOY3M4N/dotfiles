@@ -49,7 +49,7 @@ return {
         lualine_y = { projectRoot(), 'progress' },
         lualine_z = { 'location' },
       },
-      extensions = { 'mason', 'lazy' },
+      extensions = { 'mason', 'lazy', 'trouble' },
     }
   end,
 }
