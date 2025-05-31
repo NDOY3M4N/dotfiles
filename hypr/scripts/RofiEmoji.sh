@@ -2,7 +2,7 @@
 # NOTE: Rofi Emoticons. Not my own. Cant remember the source
 
 sed '1,/^# # DATA # #$/d' "$0" | \
-rofi -i -dmenu -config ~/.config/rofi/emoji.rasi | \
+tofi -c ~/.config/tofi/configV | \
 awk -F'\t' '{print $1}' | \
 tr -d '\n' | \
 wl-copy
