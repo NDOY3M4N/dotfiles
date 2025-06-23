@@ -71,8 +71,49 @@ return {
       local servers = {
         -- NOTE: when the support for HTML super language is there...
         -- biome = {},
-        -- eslint = {},
         -- emmet_ls = {},
+        eslint = {
+          filetypes = {
+            'javascript',
+            'javascriptreact',
+            'javascript.jsx',
+            'typescript',
+            'typescriptreact',
+            'typescript.tsx',
+            'vue',
+            'html',
+            'markdown',
+            'json',
+            'jsonc',
+            'yaml',
+            'toml',
+            'xml',
+            'gql',
+            'graphql',
+            'astro',
+            'svelte',
+            'css',
+            'less',
+            'scss',
+            'pcss',
+            'postcss',
+          },
+          settings = {
+            -- Silent the stylistic rules in you IDE, but still auto fix them
+            rulesCustomizations = {
+              { rule = 'style/*', severity = 'off', fixable = true },
+              { rule = 'format/*', severity = 'off', fixable = true },
+              { rule = '*-indent', severity = 'off', fixable = true },
+              { rule = '*-spacing', severity = 'off', fixable = true },
+              { rule = '*-spaces', severity = 'off', fixable = true },
+              { rule = '*-order', severity = 'off', fixable = true },
+              { rule = '*-dangle', severity = 'off', fixable = true },
+              { rule = '*-newline', severity = 'off', fixable = true },
+              { rule = '*quotes', severity = 'off', fixable = true },
+              { rule = '*semi', severity = 'off', fixable = true },
+            },
+          },
+        },
         html = {},
         ts_ls = {
           -- root_dir = function()
@@ -215,12 +256,6 @@ return {
       end,
       formatters_by_ft = {
         go = { 'goimports-reviser', 'gofumpt', 'golines' },
-        javascript = { 'prettierd' },
-        typescript = { 'prettierd' },
-        typescriptreact = { 'prettierd' },
-        javascriptreact = { 'prettierd' },
-        svelte = { 'prettierd' },
-        vue = { 'prettierd' },
         lua = { 'stylua' },
         php = { 'php_cs_fixer' },
       },
