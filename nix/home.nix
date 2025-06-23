@@ -113,6 +113,8 @@
   };
 
   home.packages = with pkgs; [
+    gnome-themes-extra
+    nwg-look
     # NOTE: must have CLI tools
     git
     gh
@@ -136,6 +138,7 @@
     wl-clipboard
     playerctl
     rofi-wayland
+    tofi
     alsa-utils
     pamixer
     # kanata
@@ -169,13 +172,25 @@
     goose
     sqlc
     air
-    kitty
+    # kitty
     ghostty
     # gnome-network-displays
     rqbit
     highlight
     glow
     slides
+    discord
+
+    # NOTE: LibreOffice
+    libreoffice-qt6-fresh
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.fr-moderne
+
+    imagemagick
+    hyprpicker
+    cliphist
+    # r-minesweeper
 
     (waybar.overrideAttrs (oldAttrs: {
       mesonFlags = oldAttrs.mesonFlags ++ [ "-Dexperimental=true" ];
@@ -188,6 +203,8 @@
 
   home.sessionPath = [
     "$HOME/.npm-global/bin"
+    "$HOME/.local/bin"
+    "$HOME/go/bin"
   ];
 
   # Let Home Manager install and manage itself.

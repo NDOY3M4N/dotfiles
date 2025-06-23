@@ -33,6 +33,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
 
+  programs.nix-ld.enable = true;
+
   # Enable the Wayland windowing system.
   services.xserver = {
     enable = true;
@@ -48,6 +50,7 @@
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    TERMINAL = "kitty";
   };
 
   hardware = {
@@ -72,15 +75,24 @@
         extraDefCfg = "process-unmapped-keys yes";
         config = ''
           (defsrc
-            caps
+            caps a s d f j k l ;
           )
 
           (defalias
-            escctrl (tap-hold 200 200 esc lctl)
+            caps (tap-hold 250 250 esc lctl)
+
+            a (tap-hold 250 250 a lmet)
+            s (tap-hold 250 250 s lalt)
+            d (tap-hold 250 250 d lsft)
+            f (tap-hold 250 250 f lctl)
+            j (tap-hold 250 250 j rctl)
+            k (tap-hold 250 250 k rsft)
+            l (tap-hold 250 250 l ralt)
+            ; (tap-hold 250 250 ; rmet)
           )
 
           (deflayer base
-            @escctrl
+            @caps @a @s @d @f @j @k @l @;
           )
         '';
       };
@@ -159,18 +171,22 @@
   users.users.p4p1 = {
     isNormalUser = true;
     description = "Abdoulaye NDOYE";
-    extraGroups = [ "networkmanager" "wheel" "input" "uinput" ];
-    # packages = with pkgs; [
-    # #  thunderbird
-    # ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "input"
+      "uinput"
+    ];
   };
 
-  # virtualisation.docker.enable = true;
-  # virtualisation.docker.storageDriver = "btrfs";
-  # virtualisation.docker.rootless = {
-  #   enable = true;
-  #   setSocketVariable = true;
-  # };
+  virtualisation.docker = {
+    enable = true;
+    # Use the rootless mode - run Docker daemon as non-root user
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+    };
+  };
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -212,6 +228,7 @@
     git
     gnome-network-displays
     kanata
+    upower
 
     # NOTE: for device connection
     libimobiledevice
@@ -250,6 +267,11 @@
     enable = true;
     settings.PasswordAuthentication = true;
   };
+
+  # NOTE: for beekeeper-studio
+  nixpkgs.config.permittedInsecurePackages = [
+    "beekeeper-studio-5.2.9"
+  ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 7236 7250 ];
