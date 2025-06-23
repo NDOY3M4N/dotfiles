@@ -35,6 +35,11 @@
 
       # Change keymap for autosuggestion
       bindkey '^E' autosuggest-accept
+
+      # Custom function to create a directory and cd into it
+      mkcd() {
+        mkdir -p "$1" && cd "$1"
+      }
     '';
     shellAliases = {
       ns = "nix-shell";
