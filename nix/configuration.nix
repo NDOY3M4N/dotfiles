@@ -285,11 +285,6 @@
     settings.PasswordAuthentication = true;
   };
 
-  # NOTE: unstable packages (latest version)
-  # nixpkgs.config.permittedInsecurePackages = [
-  #   "beekeeper-studio-5.2.12"
-  # ];
-
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 7236 7250 ];
   networking.firewall.allowedUDPPorts = [ 7236 5333 ];

@@ -16,7 +16,7 @@
         };
       }
     ];
-    initExtra = ''
+    initContent = ''
       # Make completion (including directory completion) case-insensitive
       zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
       # Disable sort for git-checkout completion

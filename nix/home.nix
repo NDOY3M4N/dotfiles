@@ -81,7 +81,7 @@
     enable = true;
     enableSshSupport = true;
     enableZshIntegration = true;
-    pinentry-package = pkgs.pinentry-gnome3;
+    pinentry.package = pkgs.pinentry-gnome3;
   };
 
   services.swaync.enable = true;
@@ -111,6 +111,12 @@
       gtk-application-prefer-dark-theme = 1;
     };
   };
+
+  # NOTE: unstable packages (latest version)
+  nixpkgs.config.permittedInsecurePackages = [
+    "beekeeper-studio-5.2.12"
+  ];
+
 
   home.packages = with pkgs; [
     gnome-themes-extra
@@ -155,7 +161,7 @@
     sqlite
     obsidian
     mpv
-    # beekeeper-studio
+    beekeeper-studio
     telegram-desktop
     ffmpeg
     # NOTE: the display wallpaper stuffs
@@ -174,7 +180,6 @@
     air
     # kitty
     ghostty
-    # gnome-network-displays
     rqbit
     highlight
     glow
