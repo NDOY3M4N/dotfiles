@@ -2,7 +2,7 @@ return {
   -- Display colors
   {
     'catgoose/nvim-colorizer.lua',
-    event = 'VeryLazy',
+    event = 'BufReadPre',
     opts = {
       lazy_load = true,
       filetypes = {

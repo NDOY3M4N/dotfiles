@@ -8,7 +8,7 @@ return {
     opts = {
       flavour = 'mocha',
       no_italic = true,
-      transparent_background = true,
+      -- transparent_background = true,
       integrations = {
         harpoon = true,
         cmp = true,
