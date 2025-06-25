@@ -36,21 +36,26 @@
   programs.nix-ld.enable = true;
 
   # Enable the Wayland windowing system.
-  services.xserver = {
-    enable = true;
+  services = {
     # Enable the GNOME Desktop Environment and use Wayland
     displayManager.gdm.enable = true;
     desktopManager.gnome.enable = true;
-    # displayManager.gdm.waylandOnly = true;
+  };
+  services.xserver = {
+    enable = true;
     xkb.layout = "us";
     xkb.variant = "";
-    # xkb.options = "caps:escape";
   };
 
   environment.sessionVariables = {
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     TERMINAL = "kitty";
+  };
+
+  environment.variables = {
+    ANDROID_SDK_ROOT = "${pkgs.android-studio}/libexec/android-sdk";
+    JAVA_HOME = "${pkgs.jdk17}";
   };
 
   hardware = {
@@ -207,11 +212,23 @@
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
+  nixpkgs.config.android_sdk.accept_license = true;
+
+  environment.shellInit = ''
+    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/platform-tools
+    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/cmdline-tools/latest/bin
+    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/emulator
+  '';
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
+    flutter
+    android-studio
+    jdk17
+    firebase-tools
+
     iw
     libnotify
     curl
@@ -245,7 +262,7 @@
   fonts = {
     fontDir.enable = true;
     packages = with pkgs; [
-      (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
+      nerd-fonts.symbols-only
       ibm-plex
       jetbrains-mono
     ];
@@ -268,10 +285,10 @@
     settings.PasswordAuthentication = true;
   };
 
-  # NOTE: for beekeeper-studio
-  nixpkgs.config.permittedInsecurePackages = [
-    "beekeeper-studio-5.2.9"
-  ];
+  # NOTE: unstable packages (latest version)
+  # nixpkgs.config.permittedInsecurePackages = [
+  #   "beekeeper-studio-5.2.12"
+  # ];
 
   # Open ports in the firewall.
   networking.firewall.allowedTCPPorts = [ 22 7236 7250 ];

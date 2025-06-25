@@ -81,7 +81,7 @@
     enable = true;
     enableSshSupport = true;
     enableZshIntegration = true;
-    pinentryPackage = pkgs.pinentry-gnome3;
+    pinentry-package = pkgs.pinentry-gnome3;
   };
 
   services.swaync.enable = true;
@@ -155,7 +155,7 @@
     sqlite
     obsidian
     mpv
-    beekeeper-studio
+    # beekeeper-studio
     telegram-desktop
     ffmpeg
     # NOTE: the display wallpaper stuffs
