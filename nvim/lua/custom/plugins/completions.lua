@@ -9,17 +9,11 @@ return {
         'L3MON4D3/LuaSnip',
         version = '2.*',
         build = 'make install_jsregexp',
-        dependencies = {
-          -- {
-          --   'rafamadriz/friendly-snippets',
-          --   config = function()
-          --     require('luasnip.loaders.from_vscode').lazy_load()
-          --   end,
-          -- },
-        },
         opts = {},
       },
       'folke/lazydev.nvim',
+      'Kaiser-Yang/blink-cmp-git',
+      'kristijanhusak/vim-dadbod-completion',
     },
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
@@ -55,7 +49,13 @@ return {
 
       sources = {
         default = { 'lsp', 'path', 'snippets', 'lazydev' },
+        per_filetype = {
+          gitcommit = { 'git' },
+          sql = { 'snippets', 'dadbod', 'buffer' },
+        },
         providers = {
+          git = { module = 'blink-cmp-git' },
+          dadbod = { name = 'Dadbod', module = 'vim_dadbod_completion.blink' },
           lazydev = { module = 'lazydev.integrations.blink', score_offset = 100 },
         },
       },
@@ -64,8 +64,5 @@ return {
       fuzzy = { implementation = 'lua' },
       signature = { enabled = true },
     },
-    -- config = function()
-    --   require 'custom.config.completions'
-    -- end,
   },
 }
