@@ -36,6 +36,11 @@
     enable = true;
     userName  = "NDOY3M4N";
     userEmail = "pa.ndoye@outlook.fr";
+    extraConfig = {
+      init = {
+        defaultBranch = "main";
+      };
+    };
     includes = [
       {
         condition = "gitdir:~/Documents/Projects/simen/";

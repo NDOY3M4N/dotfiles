@@ -43,6 +43,7 @@
     '';
     shellAliases = {
       ns = "nix-shell";
+      nv = "nvim";
       nrs = "sudo nixos-rebuild switch --flake ~/Documents/Projects/private/dotfiles/nix";
       hrs = "home-manager switch --flake ~/Documents/Projects/private/dotfiles/nix";
       la = "ls -la";
