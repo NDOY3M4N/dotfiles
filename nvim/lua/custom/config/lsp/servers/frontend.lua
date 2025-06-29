@@ -26,6 +26,10 @@ M.servers = {
   html = {},
   eslint = {
     filetypes = {
+      -- 'json',
+      -- 'jsonc',
+      -- 'yaml',
+      -- 'toml',
       'javascript',
       'javascriptreact',
       'javascript.jsx',
@@ -35,10 +39,6 @@ M.servers = {
       'vue',
       'html',
       'markdown',
-      'json',
-      'jsonc',
-      'yaml',
-      'toml',
       'xml',
       'gql',
       'graphql',
@@ -107,8 +107,8 @@ M.servers = {
       },
     },
   },
-  svelte = {},
-  vue_ls = {},
+  -- svelte = {},
+  -- vue_ls = {},
 }
 
 return M
