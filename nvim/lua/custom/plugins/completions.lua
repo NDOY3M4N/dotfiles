@@ -37,14 +37,28 @@ return {
 
         ['<C-k>'] = { 'show_signature', 'hide_signature', 'fallback' },
       },
-      appearance = {
-        nerd_font_variant = 'mono',
-      },
+
+      appearance = { nerd_font_variant = 'mono' },
 
       completion = {
-        -- By default, you may press `<c-space>` to show the documentation.
-        -- Optionally, set `auto_show = true` to show the documentation after a delay.
-        documentation = { auto_show = true, auto_show_delay_ms = 500 },
+        documentation = {
+          auto_show = true,
+          auto_show_delay_ms = 500,
+          window = { border = 'rounded' },
+        },
+        menu = {
+          draw = {
+            columns = {
+              { 'label', 'label_description', gap = 1 },
+              { 'kind_icon', 'kind' },
+            },
+          },
+        },
+      },
+
+      signature = {
+        enabled = true,
+        window = { border = 'rounded' },
       },
 
       sources = {
@@ -62,7 +76,6 @@ return {
 
       snippets = { preset = 'luasnip' },
       fuzzy = { implementation = 'lua' },
-      signature = { enabled = true },
     },
   },
 }

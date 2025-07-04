@@ -8,14 +8,14 @@ local vue_plugin = {
   enableForWorkspaceTypescriptVersions = true,
 }
 
-local svelte_lsp_path = vim.fn.stdpath 'data' .. '/mason/packages/svelte-language-server'
-local svelte_plugin = {
-  name = 'typescript-svelte-plugin',
-  location = svelte_lsp_path,
-  languages = { 'svelte' },
-  configNamespace = 'typescript',
-  enableForWorkspaceTypeScriptVersions = true,
-}
+-- local svelte_lsp_path = vim.fn.stdpath 'data' .. '/mason/packages/svelte-language-server'
+-- local svelte_plugin = {
+--   name = 'typescript-svelte-plugin',
+--   location = svelte_lsp_path,
+--   languages = { 'svelte' },
+--   configNamespace = 'typescript',
+--   enableForWorkspaceTypeScriptVersions = true,
+-- }
 
 local M = {}
 
@@ -69,46 +69,40 @@ M.servers = {
   vtsls = {
     filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'svelte' },
     settings = {
-      javascript = {
-        -- preferences = {
-        --   importModuleSpecifier = "non-relative",
-        -- },
-        inlayHints = {
-          functionLikeReturnTypes = { enabled = true },
-          parameterNames = { enabled = 'all' },
-          variableTypes = { enabled = true },
-        },
-      },
-      typescript = {
-        inlayHints = {
-          parameterNames = { enabled = 'all' },
-          propertyDeclarationTypes = { enabled = true },
-          functionLikeReturnTypes = { enabled = true },
-          enumMemberValues = { enabled = true },
-          parameterTypes = { enabled = true },
-          variableTypes = { enabled = true },
-        },
-      },
       vtsls = {
-        autoUserWorkspaceTsdk = true,
-        experimental = {
-          maxInlayHintLength = 30,
-          completion = {
-            enableServerSideFuzzyMatch = true,
-            entriesLimit = 50,
-          },
-        },
         tsserver = {
-          preferences = {
-            includeInlayFunctionLikeReturnTypeHints = false,
+          globalPlugins = {
+            vue_plugin,
           },
-          globalPlugins = { vue_plugin, svelte_plugin },
         },
       },
     },
   },
-  -- svelte = {},
-  -- vue_ls = {},
+  svelte = {},
+  vue_ls = {
+    on_init = function(client)
+      client.handlers['tsserver/request'] = function(_, result, context)
+        local clients = vim.lsp.get_clients { bufnr = context.bufnr, name = 'vtsls' }
+        if #clients == 0 then
+          vim.notify('Could not found `vtsls` lsp client, vue_lsp would not work without it.', vim.log.levels.ERROR)
+          return
+        end
+        local ts_client = clients[1]
+
+        local param = unpack(result)
+        local id, command, payload = unpack(param)
+        ts_client:exec_cmd({
+          title = 'vue_request_forward',
+          command = 'typescript.tsserverRequest',
+          arguments = { command, payload },
+        }, { bufnr = context.bufnr }, function(_, r)
+          local response_data = { { id, r.body } }
+          ---@diagnostic disable-next-line: param-type-mismatch
+          client:notify('tsserver/response', response_data)
+        end)
+      end
+    end,
+  },
 }
 
 return M

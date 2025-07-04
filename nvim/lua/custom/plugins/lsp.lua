@@ -61,6 +61,7 @@ return {
       }
 
       local servers = {
+        nil_ls = {},
         jsonls = {
           settings = {
             json = {
