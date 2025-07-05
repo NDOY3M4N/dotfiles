@@ -191,6 +191,8 @@
     slides
     discord
 
+    openssl
+
     # NOTE: LibreOffice
     libreoffice-qt6-fresh
     hunspell

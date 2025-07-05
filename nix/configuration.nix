@@ -54,7 +54,10 @@
   };
 
   environment.variables = {
-    ANDROID_SDK_ROOT = "${pkgs.android-studio}/libexec/android-sdk";
+    ANDROID_AVD_HOME = "$HOME/.android/avd";
+    ANDROID_HOME = "$HOME/Android/Sdk";
+    ANDROID_SDK_ROOT = "$ANDROID_HOME";
+    PKG_CONFIG_PATH = "${pkgs.libsecret.dev}/lib/pkgconfig";
     JAVA_HOME = "${pkgs.jdk17}";
   };
 
@@ -65,6 +68,8 @@
   };
 
   # NOTE: kanata
+
+  # services.gnome-keyring.enable = true;
 
   services.udev.extraRules = ''
     KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"
@@ -215,9 +220,9 @@
   nixpkgs.config.android_sdk.accept_license = true;
 
   environment.shellInit = ''
-    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/platform-tools
-    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/cmdline-tools/latest/bin
-    export PATH=$PATH:${pkgs.android-studio}/libexec/android-sdk/emulator
+    export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+    export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
+    export PATH=$PATH:$HOME/Android/Sdk/emulator/emulator
   '';
 
   # List packages installed in system profile. To search, run:
@@ -228,6 +233,8 @@
     android-studio
     jdk17
     firebase-tools
+    gnome-keyring
+    libsecret
 
     iw
     libnotify
