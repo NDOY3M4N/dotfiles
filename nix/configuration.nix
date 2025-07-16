@@ -53,14 +53,6 @@
     TERMINAL = "kitty";
   };
 
-  environment.variables = {
-    ANDROID_AVD_HOME = "$HOME/.android/avd";
-    ANDROID_HOME = "$HOME/Android/Sdk";
-    ANDROID_SDK_ROOT = "$ANDROID_HOME";
-    PKG_CONFIG_PATH = "${pkgs.libsecret.dev}/lib/pkgconfig";
-    JAVA_HOME = "${pkgs.jdk17}";
-  };
-
   hardware = {
     graphics.enable = true;
     uinput.enable = true;
@@ -186,6 +178,9 @@
       "wheel"
       "input"
       "uinput"
+      # Flutter
+      "kvm"
+      "adbusers"
     ];
   };
 
@@ -217,24 +212,44 @@
   
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-  nixpkgs.config.android_sdk.accept_license = true;
 
-  environment.shellInit = ''
-    export PATH=$PATH:$HOME/Android/Sdk/platform-tools
-    export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
-    export PATH=$PATH:$HOME/Android/Sdk/emulator/emulator
-  '';
+  nixpkgs.config.android_sdk.accept_license = true;
+  programs.adb.enable = true;
+
+  # environment.shellInit = ''
+  #   export PATH=$PATH:$HOME/Android/Sdk/platform-tools
+  #   export PATH=$PATH:$HOME/Android/Sdk/cmdline-tools/latest/bin
+  #   export PATH=$PATH:$HOME/Android/Sdk/emulator/emulator
+  # '';
+
+  environment.variables = {
+    # ANDROID_AVD_HOME = "$HOME/.android/avd";
+    # ANDROID_HOME = "$HOME/Android/Sdk";
+    # ANDROID_SDK_ROOT = "$ANDROID_HOME";
+    # PKG_CONFIG_PATH = "${pkgs.libsecret.dev}/lib/pkgconfig";
+    JAVA_HOME = "${pkgs.jdk21_headless}/lib/openjdk";
+  };
+
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     neovim
-    flutter
-    android-studio
-    jdk17
-    firebase-tools
     gnome-keyring
-    libsecret
+
+    # flutter
+    # android-studio
+    # jdk21
+    # firebase-tools
+    # libsecret
+
+
+    # openjdk17
+    jdk21_headless
+    # (maven.override { jdk = jdk21_headless; })
+    # (spring-boot-cli.override { jdk = jdk21_headless; })
+    maven
+    spring-boot-cli
 
     iw
     libnotify

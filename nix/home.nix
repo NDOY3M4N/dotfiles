@@ -190,6 +190,7 @@
     glow
     slides
     discord
+    tetrio-desktop
 
     openssl
 
