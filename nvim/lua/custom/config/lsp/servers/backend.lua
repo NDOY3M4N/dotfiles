@@ -2,6 +2,7 @@ local M = {}
 
 M.servers = {
   intelephense = {},
+  -- jdtls = {},
   gopls = {
     settings = {
       gopls = {

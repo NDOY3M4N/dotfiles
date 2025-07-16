@@ -103,6 +103,7 @@ M.servers = {
       end
     end,
   },
+  angularls = {},
 }
 
 return M
