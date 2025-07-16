@@ -28,12 +28,6 @@ vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv", { desc = 'Move line up' })
 -- Ctrl-s to save file
 vim.keymap.set('n', '<C-s>', '<cmd>w<cr>', { desc = 'Save current file' })
 
--- Toggle Inlay hints (if supported by the LSP)
-vim.keymap.set('n', '<leader>gh', function()
-  -- TODO: Notify the user when the LSP doesn't support inlay hints
-  vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled {})
-end, { desc = 'Toggle Inlay hints (if supported by LSP)' })
-
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
