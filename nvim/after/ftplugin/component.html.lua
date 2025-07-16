@@ -1,2 +1,2 @@
-vim.cmd [[set filetype=angular]]
+-- vim.cmd [[set filetype=angular]]
 print 'foo'
