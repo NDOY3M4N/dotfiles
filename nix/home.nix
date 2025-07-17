@@ -193,6 +193,7 @@
     tetrio-desktop
 
     openssl
+    jdt-language-server
 
     # NOTE: LibreOffice
     libreoffice-qt6-fresh

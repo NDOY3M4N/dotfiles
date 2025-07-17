@@ -178,9 +178,6 @@
       "wheel"
       "input"
       "uinput"
-      # Flutter
-      "kvm"
-      "adbusers"
     ];
   };
 
@@ -228,6 +225,7 @@
     # ANDROID_SDK_ROOT = "$ANDROID_HOME";
     # PKG_CONFIG_PATH = "${pkgs.libsecret.dev}/lib/pkgconfig";
     JAVA_HOME = "${pkgs.jdk21_headless}/lib/openjdk";
+    JDTLS_JVM_ARGS = "-javaagent:$HOME/.local/share/java/lombok.jar";
   };
 
 
