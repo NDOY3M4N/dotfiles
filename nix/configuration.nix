@@ -51,6 +51,13 @@
     WLR_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
     TERMINAL = "kitty";
+
+    # Node-API (dynamic library) for Prisma Client
+    PRISMA_QUERY_ENGINE_LIBRARY = "${pkgs.prisma-engines}/lib/libquery_engine.node";
+    # CLI engines (schema/migration/introspection)
+    PRISMA_SCHEMA_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/schema-engine";
+    PRISMA_INTROSPECTION_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/introspection-engine";
+    PRISMA_MIGRATION_ENGINE_BINARY = "${pkgs.prisma-engines}/bin/migration-engine-cli";
   };
 
   hardware = {
@@ -234,6 +241,9 @@
   environment.systemPackages = with pkgs; [
     neovim
     gnome-keyring
+
+    prisma
+    prisma-engines
 
     # flutter
     # android-studio
