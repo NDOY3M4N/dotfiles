@@ -8,6 +8,8 @@ local vue_plugin = {
   enableForWorkspaceTypescriptVersions = true,
 }
 
+-- local angular_lsp_path = vim.fn.stdpath 'data' .. '/mason/packages/angular-language-server'
+
 -- local svelte_lsp_path = vim.fn.stdpath 'data' .. '/mason/packages/svelte-language-server'
 -- local svelte_plugin = {
 --   name = 'typescript-svelte-plugin',
@@ -103,7 +105,9 @@ M.servers = {
       end
     end,
   },
-  angularls = {},
+  angularls = {
+    filetypes = { 'html', 'htmlangular' },
+  },
 }
 
 return M

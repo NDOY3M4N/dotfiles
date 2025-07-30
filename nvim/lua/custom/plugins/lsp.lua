@@ -62,6 +62,7 @@ return {
 
       local servers = {
         nil_ls = {},
+        prismals = {},
         jsonls = {
           settings = {
             json = {
