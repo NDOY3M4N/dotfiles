@@ -40,8 +40,8 @@ M.servers = {
       'typescript.tsx',
       'vue',
       'html',
-      'markdown',
-      'xml',
+      -- 'markdown',
+      -- 'xml',
       'gql',
       'graphql',
       'astro',
@@ -69,7 +69,7 @@ M.servers = {
     },
   },
   vtsls = {
-    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue', 'svelte' },
+    filetypes = { 'typescript', 'javascript', 'javascriptreact', 'typescriptreact', 'vue' },
     settings = {
       vtsls = {
         tsserver = {
