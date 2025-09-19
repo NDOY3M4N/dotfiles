@@ -2,7 +2,9 @@ local M = {}
 
 M.servers = {
   intelephense = {},
-  jdtls = {},
+  jdtls = {
+    cmd = { "jdtls", "-configuration", "/home/p4p1/.cache/jdtls/config", "-data", "/home/p4p1/.cache/jdtls/workspace" }
+  },
   gopls = {
     settings = {
       gopls = {
